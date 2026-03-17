@@ -24,9 +24,16 @@ def setup_file():
     purchaseSet = read_file("purchases-2000.csv", "true")
     return users, items, purchaseSet
 
+def get_array_len(matrix):
+    return len(matrix)
 
 def create_indices(dictionary):
     return {uid: lineIndex for lineIndex, uid in enumerate(sorted(dictionary.keys()))}
+
+def create_purchases(columnSize, rowSize):
+    return np.zeros((get_array_len(columnSize), 
+                    get_array_len(rowSize)),
+                   dtype=int)
 
 """def create_item_indices():
     return {iid: lineIndex for lineIndex, iid in enumerate(sorted(items.keys()))}
@@ -38,9 +45,10 @@ def main():
     with ZipFile("purchases_data.zip") as f:
         f.extractall()        
     users, items, purchaseSet = setup_file()
-    itemIndices = create_user_indices(items)
-    userIndices = create_user_indices(users)
-    print(userIndices[63776])
-
+    userIndices = create_indices(users)
+    itemIndices = create_indices(items)
+    create_purchases(userIndices, itemIndices)
+    print(create_purchases(userIndices, itemIndices))
+    
 if __name__ == "__main__":
     main()
