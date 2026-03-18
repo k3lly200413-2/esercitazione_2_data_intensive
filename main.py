@@ -41,6 +41,9 @@ def populate_purchase(userIndices, itemIndices, purchases, purchaseSet):
 
 def convert_to_bool(matrixToConvert):
     return matrixToConvert.astype(bool)
+
+def create_user_names_vector(nUsers):
+    return np.empty(nUsers, dtype=object)
     
 def main():
     if not os.path.exists("purchases_data.zip"):
