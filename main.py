@@ -61,26 +61,30 @@ def main():
     purchases = create_purchases(userIndices, itemIndices)
     # print(itemIndices.items())
     
-    populatePurchase(userIndices, itemIndices, purchases, purchaseSet)
+    populate_purchase(userIndices, itemIndices, purchases, purchaseSet)
     
-    purchasesBool = convert_to_bool(purchases)
+    purchases_bool = convert_to_bool(purchases)
     
     userNames = create_user_names_vector(get_array_len(userIndices))
     
-    userNames = [users[name] for name in userIndices.keys()]
+    userNames = np.array([users[name] for name in userIndices])
     
-    itemNames = [items[item] for item in itemIndices.keys()]
+    itemNames = np.array([items[item] for item in itemIndices])
     
     # print(user_names)
     
     # TEST
-    assert user_names[0] == "malachix"
-    # assert item_names[0] == "Age of Innocence [VHS]"
+    assert userNames[0] == "malachix"
+    assert itemNames[0] == "Age of Innocence [VHS]"
     assert purchases[0, 0] == 0
     assert purchases[-4, 10] == 1
     assert purchases[-2, 12] == 1
     assert purchases[-1, -1] == 0
     print("OKAY")
+    
+    print(itemNames[11])
+    
+    print(itemNames[[3112, 1417, 3109]])
     
 if __name__ == "__main__":
     main()
