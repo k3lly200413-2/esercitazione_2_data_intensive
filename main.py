@@ -63,16 +63,22 @@ def main():
     
     populate_purchase(userIndices, itemIndices, purchases, purchaseSet)
     
+    purchases_bool = convert_to_bool(purchases)
+    
+    user_names = create_user_names_vector(get_array_len(userIndices))
+    
+    user_names = [users[name] for name in userIndices.keys()]
+    
+    # print(user_names)
+    
     # TEST
+    assert user_names[0] == "malachix"
+    # assert item_names[0] == "Age of Innocence [VHS]"
     assert purchases[0, 0] == 0
     assert purchases[-4, 10] == 1
     assert purchases[-2, 12] == 1
     assert purchases[-1, -1] == 0
     print("OKAY")
-    
-    purchases_bool = convert_to_bool(purchases)
-    print(purchases_bool)
-    
     
 if __name__ == "__main__":
     main()
