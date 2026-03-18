@@ -61,13 +61,15 @@ def main():
     purchases = create_purchases(userIndices, itemIndices)
     # print(itemIndices.items())
     
-    populate_purchase(userIndices, itemIndices, purchases, purchaseSet)
+    populatePurchase(userIndices, itemIndices, purchases, purchaseSet)
     
-    purchases_bool = convert_to_bool(purchases)
+    purchasesBool = convert_to_bool(purchases)
     
-    user_names = create_user_names_vector(get_array_len(userIndices))
+    userNames = create_user_names_vector(get_array_len(userIndices))
     
-    user_names = [users[name] for name in userIndices.keys()]
+    userNames = [users[name] for name in userIndices.keys()]
+    
+    itemNames = [items[item] for item in itemIndices.keys()]
     
     # print(user_names)
     
