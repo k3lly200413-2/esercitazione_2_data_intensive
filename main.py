@@ -35,9 +35,13 @@ def create_purchases(columnSize, rowSize):
                     get_array_len(rowSize)),
                    dtype=int)
 
-"""def create_item_indices():
-    return {iid: lineIndex for lineIndex, iid in enumerate(sorted(items.keys()))}
-"""
+def populate_purchase(userIndices, itemIndices, purchases, purchaseSet):
+    for couple in purchaseSet:
+        purchases[userIndices[couple[0]], itemIndices[int(couple[1])]] = 1
+
+def convert_to_bool(matrixToConvert):
+    return matrixToConvert.astype(bool)
+    
 def main():
     if not os.path.exists("purchases_data.zip"):
         urlretrieve("https://git.io/fhxQh", "purchases_data.zip")
@@ -45,10 +49,27 @@ def main():
     with ZipFile("purchases_data.zip") as f:
         f.extractall()        
     users, items, purchaseSet = setup_file()
+    
+    # userIndices = UserID, index
     userIndices = create_indices(users)
+    # itemIndices = ItemID, index
     itemIndices = create_indices(items)
-    create_purchases(userIndices, itemIndices)
-    print(create_purchases(userIndices, itemIndices))
+
+    purchases = create_purchases(userIndices, itemIndices)
+    # print(itemIndices.items())
+    
+    populate_purchase(userIndices, itemIndices, purchases, purchaseSet)
+    
+    # TEST
+    assert purchases[0, 0] == 0
+    assert purchases[-4, 10] == 1
+    assert purchases[-2, 12] == 1
+    assert purchases[-1, -1] == 0
+    print("OKAY")
+    
+    purchases_bool = convert_to_bool(purchases)
+    print(purchases_bool)
+    
     
 if __name__ == "__main__":
     main()
