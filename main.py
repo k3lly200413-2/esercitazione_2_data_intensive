@@ -107,5 +107,7 @@ def main():
     """
     print(item_purchases.max())
     
+    print(userNames[np.where(user_purchases == user_purchases.max())[0][0]])
+    
 if __name__ == "__main__":
     main()
