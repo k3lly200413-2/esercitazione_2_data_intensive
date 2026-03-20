@@ -55,6 +55,13 @@ def get_elements_from_array(matrixToExtractFrom,
                             arrayFilter
                             ):
     return matrixToExtractFrom[arrayFilter]
+
+def sum_elements(matrix):
+    return matrix.sum()
+
+# axis 0 = row, axis 1 = columns
+def sum_elements(matrix, axis=0):
+    return matrix.sum(axis)
     
 def main():
     if not os.path.exists("purchases_data.zip"):
@@ -93,8 +100,11 @@ def main():
     assert purchases[-1, -1] == 0
     print("OKAY")
 
-    print(purchased_by_specific_user(purchases_bool, 176))
-    print(get_elements_from_array(itemNames, purchased_by_specific_user(purchases_bool, 176))[:10])
+    user_purchases = sum_elements(purchases, 1)
+    item_purchases = sum_elements(purchases, 0)
+    
+    print(user_purchases[:10])
+    print(item_purchases[:10])
     
 if __name__ == "__main__":
     main()
