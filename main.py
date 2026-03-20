@@ -62,6 +62,22 @@ def sum_elements(matrix):
 def sum_elements(matrix, axis=0):
     return matrix.sum(axis)
 
+def similarity(array1, array2):
+    # we could do this different ways, this way only checks if they both are True
+    # return array1 & array2
+        # if we have 0s and 1s we can multiply them together
+    # return array1 * array2
+        # we can then get the number of 1s using sum
+    # return np.sum(array1 * array2)
+    
+    # all of this is made into a function called np.dot(...)
+    # return np.dot(array1, array2)
+    # or 
+    # return array1.dot(array2) 
+    # we can also use @
+    return array1 @ array2
+    
+
 def main():
     if not os.path.exists("purchases_data.zip"):
         urlretrieve("https://git.io/fhxQh", "purchases_data.zip")
@@ -109,8 +125,12 @@ def main():
     
     print(userNames[np.where(user_purchases == user_purchases.max())[0][0]])
     
-    users_more_than_50_purchases = (user_purchases > 50)
+    users_more_than_50_purchases = (user_purchases >= 50)
     print(sum_elements(users_more_than_50_purchases))
+    
+    print(sum_elements(item_purchases >= 35))
+    
+    print(similarity(purchases[0], purchases[1]))
     
 if __name__ == "__main__":
     main()
