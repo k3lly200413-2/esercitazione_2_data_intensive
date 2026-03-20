@@ -21,7 +21,7 @@ def read_file(fileName, tupleFormat=False):
 def setup_file():
     users = read_file("users.csv")
     items = read_file("items.csv")
-    purchaseSet = read_file("purchases-2000.csv", "true")
+    purchaseSet = read_file("purchases-2000.csv", True)
     return users, items, purchaseSet
 
 def get_array_len(matrix):
