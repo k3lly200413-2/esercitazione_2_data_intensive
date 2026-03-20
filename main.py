@@ -52,8 +52,7 @@ def get_first_n_elements(matrix, nElements):
     return matrix[:nElements]
 
 def get_elements_from_array(matrixToExtractFrom, 
-                            arrayFilter
-                            ):
+                            arrayFilter):
     return matrixToExtractFrom[arrayFilter]
 
 def sum_elements(matrix):
@@ -103,8 +102,7 @@ def main():
     user_purchases = sum_elements(purchases, 1)
     item_purchases = sum_elements(purchases, 0)
     
-    print(user_purchases[:10])
-    print(item_purchases[:10])
-    
+    for user in userIndices.values():
+        print(purchased_by_specific_user(purchases, user).mean())
 if __name__ == "__main__":
     main()
