@@ -44,6 +44,17 @@ def convert_to_bool(matrixToConvert):
 
 def create_user_names_vector(nUsers):
     return np.empty(nUsers, dtype=object)
+
+def purchased_by_specific_user(matrix, uID):
+    return matrix[uID] # Also possible to use [uID, :]
+
+def get_first_n_elements(matrix, nElements):
+    return matrix[:nElements]
+
+def get_elements_from_array(matrixToExtractFrom, 
+                            arrayFilter
+                            ):
+    return matrixToExtractFrom[arrayFilter]
     
 def main():
     if not os.path.exists("purchases_data.zip"):
@@ -81,10 +92,9 @@ def main():
     assert purchases[-2, 12] == 1
     assert purchases[-1, -1] == 0
     print("OKAY")
-    
-    print(itemNames[11])
-    
-    print(itemNames[[3112, 1417, 3109]])
+
+    print(purchased_by_specific_user(purchases_bool, 176))
+    print(get_elements_from_array(itemNames, purchased_by_specific_user(purchases_bool, 176))[:10])
     
 if __name__ == "__main__":
     main()
