@@ -88,7 +88,6 @@ def similarity_matrix(matrix1, matrix2):
 
 def similarity_matrix(matrix):
     return matrix @ matrix.T
-
 def check_if_symmetric(matrix):
     # return (matrix == matrix.T).all()
     # Safer way to run this we can use: array_equal
@@ -164,11 +163,28 @@ def main():
     # print(check_if_symmetric(similarity_matrix(purchases)))
     similarityMatrix = similarity_matrix(purchases)
     change_diagonal(similarityMatrix, 0)
-    print(similarityMatrix.max())
+    # print(similarityMatrix.max())
     
-    print(get_max_common_product_with_user(similarityMatrix, userIndices[7661]))
+    # print(get_max_common_product_with_user(similarityMatrix, userIndices[7661]))
     
-    print(similarityMatrix[1])
+    # print(similarityMatrix[1])
+    
+    # Interesse stimato del primo utente verso il secondo prodotto
+    # print(similarityMatrix[0] @ purchases[:, 1])
+    
+    interest = similarityMatrix @ purchases
+    
+    """print(interest.shape == purchases.shape)"""
+    
+    interest[purchases_bool] = 0
+    
+    # TEST
+    assert interest[0, 0] == 0
+    assert interest[3, 3] == 8
+    assert interest[-4, 10] == 0
+    assert interest[-2, 12] == 0
+    assert interest[-1, -1] == 5
+    print("OK")
     
 if __name__ == "__main__":
     main()
