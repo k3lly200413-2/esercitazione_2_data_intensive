@@ -76,7 +76,26 @@ def similarity(array1, array2):
     # return array1.dot(array2) 
     # we can also use @
     return array1 @ array2
-    
+
+def similarity_matrix(matrix1, matrix2):
+    # We need a similarity matrix NxN with all the similarities between all entries in purchases
+    # similarity[i, j] ==  purchases[i, :] @ purchases[:, j]
+    # Matrix product returns the product of ones lines for the others columns
+    # (A @ B)[i, j] == A[i, :] @ B[:, j]
+    # We can also just use the transposed of the second matrix
+    pass
+    # return (matrix1 @ matrix2.T)[i, j] == matrix1[1, :] @ matrix2[:, j]
+
+def similarity_matrix(matrix):
+    return matrix @ matrix.T
+
+def check_if_symmetric(matrix):
+    # return (matrix == matrix.T).all()
+    # Safer way to run this we can use: array_equal
+    return np.array_equal(matrix, matrix.T)
+
+def change_diagonal(matrix, numberToReplaceDiagonalWith):
+    np.fill_diagonal(matrix, numberToReplaceDiagonalWith)
 
 def main():
     if not os.path.exists("purchases_data.zip"):
@@ -117,10 +136,12 @@ def main():
     user_purchases = sum_elements(purchases, 1)
     item_purchases = sum_elements(purchases, 0)
     
-    print(item_purchases[:5])
-    """for user in userIndices.values():
+    print(purchases)
+    
+    """print(item_purchases[:5])
+    for user in userIndices.values():
         print(purchased_by_specific_user(purchases, user).mean())
-    """
+    
     print(item_purchases.max())
     
     print(userNames[np.where(user_purchases == user_purchases.max())[0][0]])
@@ -129,8 +150,19 @@ def main():
     print(sum_elements(users_more_than_50_purchases))
     
     print(sum_elements(item_purchases >= 35))
+    """
+    # print(similarity(purchases[0], purchases[1]))
     
-    print(similarity(purchases[0], purchases[1]))
+    
+    # When slicing the matrix you will call matrix[person1, person2]
+    # This will tell you how many items both people have pruchesed
+    # print(similarity_matrix(purchases)[:10, :10])
+    
+    # print(check_if_symmetric(similarity_matrix(purchases)))
+    similarityMatrix = similarity_matrix(purchases)
+    change_diagonal(similarityMatrix, 0)
+    print(similarityMatrix)
+    
     
 if __name__ == "__main__":
     main()
