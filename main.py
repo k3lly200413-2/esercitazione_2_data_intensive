@@ -109,5 +109,8 @@ def main():
     
     print(userNames[np.where(user_purchases == user_purchases.max())[0][0]])
     
+    users_more_than_50_purchases = (user_purchases > 50)
+    print(sum_elements(users_more_than_50_purchases))
+    
 if __name__ == "__main__":
     main()
