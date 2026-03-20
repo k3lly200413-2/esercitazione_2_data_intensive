@@ -61,7 +61,7 @@ def sum_elements(matrix):
 # axis 0 = row, axis 1 = columns
 def sum_elements(matrix, axis=0):
     return matrix.sum(axis)
-    
+
 def main():
     if not os.path.exists("purchases_data.zip"):
         urlretrieve("https://git.io/fhxQh", "purchases_data.zip")
@@ -76,7 +76,6 @@ def main():
     itemIndices = create_indices(items)
 
     purchases = create_purchases(userIndices, itemIndices)
-    # print(itemIndices.items())
     
     populate_purchase(userIndices, itemIndices, purchases, purchaseSet)
     
@@ -102,7 +101,11 @@ def main():
     user_purchases = sum_elements(purchases, 1)
     item_purchases = sum_elements(purchases, 0)
     
-    for user in userIndices.values():
+    print(item_purchases[:5])
+    """for user in userIndices.values():
         print(purchased_by_specific_user(purchases, user).mean())
+    """
+    print(item_purchases.max())
+    
 if __name__ == "__main__":
     main()
