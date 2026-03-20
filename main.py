@@ -97,6 +97,9 @@ def check_if_symmetric(matrix):
 def change_diagonal(matrix, numberToReplaceDiagonalWith):
     np.fill_diagonal(matrix, numberToReplaceDiagonalWith)
 
+def get_max_common_product_with_user(matrix, uIndex):
+    return matrix[uIndex].max()
+
 def main():
     if not os.path.exists("purchases_data.zip"):
         urlretrieve("https://git.io/fhxQh", "purchases_data.zip")
@@ -136,7 +139,7 @@ def main():
     user_purchases = sum_elements(purchases, 1)
     item_purchases = sum_elements(purchases, 0)
     
-    print(purchases)
+    # print(purchases)
     
     """print(item_purchases[:5])
     for user in userIndices.values():
@@ -161,8 +164,11 @@ def main():
     # print(check_if_symmetric(similarity_matrix(purchases)))
     similarityMatrix = similarity_matrix(purchases)
     change_diagonal(similarityMatrix, 0)
-    print(similarityMatrix)
+    print(similarityMatrix.max())
     
+    print(get_max_common_product_with_user(similarityMatrix, userIndices[7661]))
+    
+    print(similarityMatrix[1])
     
 if __name__ == "__main__":
     main()
