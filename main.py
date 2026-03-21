@@ -219,7 +219,8 @@ def main():
         for uid, iid in reader:
             purchases_update[userIndices[int(uid)]][itemIndices[int(iid)]] = 1
     
-    print(purchases_update)    
+    print(purchases_update)
+    
         
 if __name__ == "__main__":
     main()
