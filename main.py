@@ -99,6 +99,15 @@ def change_diagonal(matrix, numberToReplaceDiagonalWith):
 def get_max_common_product_with_user(matrix, uIndex):
     return matrix[uIndex].max()
 
+def sort_by_args(array, row=1):
+    # argsort just returns the position of the numbers that allow the array to be sorted
+    # if we have x = np.array([320, 80, 20, 40, 160, 640, 10])
+    # with argsort we would get array([6, 2, 3, 1, 4, 0, 5])#
+    if array.ndim > 1:
+        print(True)
+        return array.argsort(row)
+    return array.argsort()
+
 def main():
     if not os.path.exists("purchases_data.zip"):
         urlretrieve("https://git.io/fhxQh", "purchases_data.zip")
@@ -184,6 +193,20 @@ def main():
     assert interest[-4, 10] == 0
     assert interest[-2, 12] == 0
     assert interest[-1, -1] == 5
+    print("OK")
+    
+    interest_rangking_user_0 = sort_by_args(sort_by_args(-interest[0]))
+    
+    interest_rangking_user_0 = interest_rangking_user_0 < 20
+        
+    interest_rangking = sort_by_args(sort_by_args(-interest))
+    
+    suggestions = interest_rangking < 20 
+    
+    assert suggestions[0, 0] == False
+    assert suggestions[0, 170] == True
+    assert suggestions[1, 400] == True
+    assert suggestions[1, 570] == False
     print("OK")
     
 if __name__ == "__main__":
