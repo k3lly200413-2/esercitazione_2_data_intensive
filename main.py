@@ -108,6 +108,9 @@ def sort_by_args(array, row=1):
         return array.argsort(row)
     return array.argsort()
 
+def populate_updated_matrix(oldMatrix):
+    return np.zeros_like(oldMatrix)
+
 def main():
     if not os.path.exists("purchases_data.zip"):
         urlretrieve("https://git.io/fhxQh", "purchases_data.zip")
@@ -208,6 +211,10 @@ def main():
     assert suggestions[1, 400] == True
     assert suggestions[1, 570] == False
     print("OK")
+    
+    purchases_update = populate_updated_matrix(purchases)
+    
+    
     
 if __name__ == "__main__":
     main()
