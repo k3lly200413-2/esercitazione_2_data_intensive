@@ -214,7 +214,12 @@ def main():
     
     purchases_update = populate_updated_matrix(purchases)
     
+    with open("purchases-2014.csv", "r") as f:
+        reader = csv.reader(f, delimiter=";")
+        for uid, iid in reader:
+            purchases_update[userIndices[int(uid)]][itemIndices[int(iid)]] = 1
     
-    
+    print(purchases_update)    
+        
 if __name__ == "__main__":
     main()
