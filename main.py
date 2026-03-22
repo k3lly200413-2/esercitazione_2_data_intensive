@@ -111,6 +111,9 @@ def sort_by_args(array, row=1):
 def populate_updated_matrix(oldMatrix):
     return np.zeros_like(oldMatrix)
 
+def XOR(matrix, matrix2):
+    return matrix ^ matrix2
+
 def main():
     if not os.path.exists("purchases_data.zip"):
         urlretrieve("https://git.io/fhxQh", "purchases_data.zip")
@@ -217,10 +220,31 @@ def main():
     with open("purchases-2014.csv", "r") as f:
         reader = csv.reader(f, delimiter=";")
         for uid, iid in reader:
-            purchases_update[userIndices[int(uid)]][itemIndices[int(iid)]] = 1
+            purchases_update[userIndices[int(uid)], itemIndices[int(iid)]] = 1
     
-    print(purchases_update)
+    new_purchases = XOR(purchases, purchases_update).astype(bool)
+    hits = suggestions & new_purchases
     
-        
+    print(hits.any(1).sum())
+    print(hits.any(1).mean() * 100)
+    
+    
+    
+    np.random.seed(123)
+    random_interest = np.random.random(interest.shape)
+    
+    random_interest[purchases_bool] = 0
+    
+    random_interest_ranking = sort_by_args(sort_by_args(- random_interest))
+    
+    random_suggestions = random_interest_ranking < 20
+    
+    random_hits = random_suggestions & new_purchases
+    randomly_satisfied_users = random_hits.any(1)
+    
+    print(randomly_satisfied_users)
+    
+    print(round(randomly_satisfied_users.mean() * 100))
+    
 if __name__ == "__main__":
     main()
